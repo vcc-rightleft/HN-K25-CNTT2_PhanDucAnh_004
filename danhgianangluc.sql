@@ -61,31 +61,31 @@ VALUES
 (2, 'P02', 'B02', '2025-11-10 08:30:00', 'Success'),
 (3, 'P03', 'B01', '2025-11-11 17:45:00', 'Failed'),
 (4, 'P01', 'B03', '2025-11-12 06:00:00', 'Success');
-
+-- Tuyến 'R02' điều chỉnh giá vé cơ bản (base_fare) tăng thêm 10%.
 update routes
 set base_fare =base_fare*1.10
 where route_id='R02';
-
+-- Cập nhật card_type của hành khách 'P03' từ 'Normal' lên 'Premium' (giả sử hệ thống mới bổ sung loại này).
 update Passengers
 set card_type='premium'
 where passenger_id='P03';
-
+--Xóa tất cả các giao dịch vé có trạng thái 'Failed'.
 delete from tickets
 where status='failed';
-
+-- Liệt kê tất cả các tuyến xe có khoảng cách (distance) lớn hơn 20km.
 select*from routes
 where distance>20;
-
+-- Lấy thông tin full_name, phone của những hành khách có loại thẻ là 'Student'.
 select full_name, phone from passengers
 where card_type='student';
-
+-- Giảm 50% giá vé cơ bản (base_fare) cho tất cả các tuyến có điểm bắt đầu là 'Hào Nam'.
 update routes
 set base_fare=base_fare*0.5
 where start_point='Hào Nam';
-
+-- Hiển thị danh sách các xe buýt gồm bus_id, plate_number, battery_level, sắp xếp theo mức pin giảm dần
 select bus_id,plate_number,battery_level from buses
 order by battery_level desc;
- 
+-- Chuyển đổi toàn bộ start_point và end_point trong bảng Routes thành chữ in hoa.
 update routes
 set start_point=upper(start_point),
 end_point=upper(end_point);
